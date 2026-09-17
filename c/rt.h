@@ -6,7 +6,7 @@
 /*   By: jeonhan <jeonhan@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/16 19:04:08 by jeonhan           #+#    #+#             */
-/*   Updated: 2026/09/17 16:50:19 by jeonhan          ###   ########.fr       */
+/*   Updated: 2026/09/17 17:14:19 by jeonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdio.h>
 # include <stdlib.h>
+# include <unistd.h>
 
 # define IMAGE_WIDTH 256
 # define IMAGE_HEIGHT 256
