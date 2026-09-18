@@ -1,24 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rt.h                                               :+:      :+:    :+:   */
+/*   ray_func.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeonhan <jeonhan@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/09/16 19:04:08 by jeonhan           #+#    #+#             */
-/*   Updated: 2026/09/18 15:47:21 by jeonhan          ###   ########.fr       */
+/*   Created: 2026/09/18 15:56:10 by jeonhan           #+#    #+#             */
+/*   Updated: 2026/09/18 16:00:26 by jeonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RT_H
-# define RT_H
+#include <ray.h>
 
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <vec3.h>
-
-# define IMAGE_WIDTH 256
-# define IMAGE_HEIGHT 256
-
-#endif
+t_point3	ray_at(t_ray r, double t)
+{
+	return (vec_add(r.origin, vec_scale(r.dir, t)));
+}

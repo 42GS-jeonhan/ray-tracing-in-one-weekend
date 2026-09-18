@@ -6,11 +6,11 @@
 /*   By: jeonhan <jeonhan@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/16 18:59:13 by jeonhan           #+#    #+#             */
-/*   Updated: 2026/09/18 15:29:18 by jeonhan          ###   ########.fr       */
+/*   Updated: 2026/09/18 15:49:44 by jeonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rt.h"
+#include <rt.h>
 
 int	main(void)
 {
@@ -27,10 +27,10 @@ int	main(void)
 		while (++j < IMAGE_WIDTH)
 		{
 			pixel_color = vec3(
-				(double)j / (IMAGE_WIDTH - 1),
-				(double)i / (IMAGE_HEIGHT - 1),
-				0
-			);
+					(double)j / (IMAGE_WIDTH - 1),
+					(double)i / (IMAGE_HEIGHT - 1),
+					0
+					);
 			write_color(pixel_color);
 			usleep(10);
 		}

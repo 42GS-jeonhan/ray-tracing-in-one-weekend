@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rt.h                                               :+:      :+:    :+:   */
+/*   ray.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeonhan <jeonhan@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/09/16 19:04:08 by jeonhan           #+#    #+#             */
-/*   Updated: 2026/09/18 15:47:21 by jeonhan          ###   ########.fr       */
+/*   Created: 2026/09/18 15:45:21 by jeonhan           #+#    #+#             */
+/*   Updated: 2026/09/18 16:00:52 by jeonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RT_H
-# define RT_H
+#ifndef RAY_H
+# define RAY_H
 
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
 # include <vec3.h>
 
-# define IMAGE_WIDTH 256
-# define IMAGE_HEIGHT 256
+typedef struct s_ray
+{
+	t_point3	origin;
+	t_vec3		dir;
+}	t_ray;
+
+t_point3	ray_at(t_ray r, double t);
 
 #endif
