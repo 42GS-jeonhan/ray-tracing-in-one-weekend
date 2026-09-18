@@ -6,7 +6,7 @@
 /*   By: jeonhan <jeonhan@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/17 17:42:37 by jeonhan           #+#    #+#             */
-/*   Updated: 2026/09/17 21:03:37 by jeonhan          ###   ########.fr       */
+/*   Updated: 2026/09/18 15:26:06 by jeonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define VEC3_H
 
 # include <math.h>
+# include <stdio.h>
 
 typedef struct s_vec3
 {
@@ -32,5 +33,9 @@ double	vec_dot(t_vec3 a, t_vec3 b); //벡터 내적
 t_vec3	vec_cross(t_vec3 a, t_vec3 b); //벡터 외적
 double	vec_length(t_vec3 v); //벡터 크기
 t_vec3	vec_unit(t_vec3 v); //단위벡터 만들기(정규화)
+
+typedef t_vec3	t_color;
+
+void	write_color(t_color c);
 
 #endif

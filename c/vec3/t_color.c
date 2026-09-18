@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rt.h                                               :+:      :+:    :+:   */
+/*   t_color.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeonhan <jeonhan@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/09/16 19:04:08 by jeonhan           #+#    #+#             */
-/*   Updated: 2026/09/17 21:29:16 by jeonhan          ###   ########.fr       */
+/*   Created: 2026/09/18 15:07:13 by jeonhan           #+#    #+#             */
+/*   Updated: 2026/09/18 15:25:13 by jeonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RT_H
-# define RT_H
+#include "vec3.h"
 
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include "vec3/vec3.h"
-
-# define IMAGE_WIDTH 256
-# define IMAGE_HEIGHT 256
-
-#endif
+void	write_color(t_color c)
+{
+	printf(
+		"%d %d %d\n",
+		(int)(c.e[0] * 255.999),
+		(int)(c.e[1] * 255.999),
+		(int)(c.e[2] * 255.999)
+		);
+}

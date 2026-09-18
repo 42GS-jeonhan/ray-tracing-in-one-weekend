@@ -6,7 +6,7 @@
 /*   By: jeonhan <jeonhan@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/16 18:59:13 by jeonhan           #+#    #+#             */
-/*   Updated: 2026/09/17 17:28:10 by jeonhan          ###   ########.fr       */
+/*   Updated: 2026/09/18 15:29:18 by jeonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 int	main(void)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	t_color	pixel_color;
 
 	printf("P3\n%d %d\n255\n", IMAGE_WIDTH, IMAGE_HEIGHT);
 	i = -1;
@@ -25,11 +26,12 @@ int	main(void)
 		j = -1;
 		while (++j < IMAGE_WIDTH)
 		{
-			printf("%d %d %d\n",
-				(int)((double)j / (IMAGE_WIDTH - 1) * 255.999), //r
-				(int)((double)i / (IMAGE_HEIGHT - 1) * 255.999), //g
-				0 //b
-				);
+			pixel_color = vec3(
+				(double)j / (IMAGE_WIDTH - 1),
+				(double)i / (IMAGE_HEIGHT - 1),
+				0
+			);
+			write_color(pixel_color);
 			usleep(10);
 		}
 	}
