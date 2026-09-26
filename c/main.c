@@ -6,15 +6,26 @@
 /*   By: jeonhan <jeonhan@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/16 18:59:13 by jeonhan           #+#    #+#             */
-/*   Updated: 2026/09/22 17:08:53 by jeonhan          ###   ########.fr       */
+/*   Updated: 2026/09/26 13:40:12 by jeonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <rt.h>
 
+int	hit_sphere(t_point3 center, double radius, t_ray r) {
+	t_vec3	oc = vec_sub(center, r.origin);
+	double	a = vec_dot(r.dir, r.dir);
+	double	b = (-2.0) * vec_dot(r.dir, oc);
+	double	c = vec_dot(oc, oc) - (radius * radius);
+	double	discriminant = (b * b) - (4.0 * a * c);
+    return (discriminant >= 0);
+}
 
 t_color	ray_color(t_ray r) {
-	t_vec3	unit_direction = r.dir;
+	if (hit_sphere(vec3(0,0,-1), 0.5, r))
+		return (vec3(1, 0, 0));
+
+	t_vec3	unit_direction = vec_unit(r.dir);
     double	a = 0.5 * (unit_direction.e[1] + 1.0);
     return vec_add(
 		vec_scale(vec3(1.0, 1.0, 1.0), (1.0 - a)), vec_scale(vec3(0.5, 0.7, 1.0) ,a)
@@ -30,7 +41,7 @@ int	main(void)
 	// double		ratio = (double)IMAGE_WIDTH / IMAGE_HEIGHT;
 	double		focal_length = 1.0;
 	double		viewport_height = 2.0;
-	double		viewport_width = viewport_height * ((double)IMAGE_WIDTH / IMAGE_HEIGHT);
+	double		viewport_width = viewport_height * ((double)IMAGE_WIDTH / (double)IMAGE_HEIGHT);
 	t_point3	camera_center = vec3(0, 0, 0);
 
 	t_vec3		viewport_u = vec3(viewport_width, 0, 0);
@@ -39,21 +50,21 @@ int	main(void)
 	t_point3	pixel_delta_u = vec_div(viewport_u, (double)IMAGE_WIDTH);
 	t_point3	pixel_delta_v = vec_div(viewport_v, (double)IMAGE_HEIGHT);
 
-	t_point3	viewport_upper_left = 
-					vec_sub(camera_center,
-						vec_sub(vec3(0, 0, focal_length),
-							vec_sub(vec_div(viewport_u, 2.0), vec_div(viewport_v, 2.0))));
+	t_point3 viewport_upper_left = 
+				vec_sub(camera_center,
+					vec_add(vec3(0, 0, focal_length),
+						vec_add(vec_div(viewport_u, 2.0), vec_div(viewport_v, 2.0))));
     t_vec3		pixel00_loc =
 					vec_add(viewport_upper_left,
 						vec_scale(vec_add(pixel_delta_u, pixel_delta_v) ,0.5));
 
 	printf("P3\n%d %d\n255\n", IMAGE_WIDTH, IMAGE_HEIGHT);
-	i = -1;
-	while (++i < IMAGE_HEIGHT)
+	j = -1;
+	while (++j < IMAGE_HEIGHT)
 	{
-		dprintf(2, "\rScanlines remaining: %d ", IMAGE_HEIGHT - i);
-		j = -1;
-		while (++j < IMAGE_WIDTH)
+		dprintf(2, "\rScanlines remaining: %d ", IMAGE_HEIGHT - j);
+		i = -1;
+		while (++i < IMAGE_WIDTH)
 		{
 			// pixel_color = vec3(
 			// 		(double)j / (IMAGE_WIDTH - 1),
@@ -62,8 +73,8 @@ int	main(void)
 			// 		);
 			t_point3	pixel_center = vec_add(pixel00_loc,
 							vec_add(
-								vec_scale(pixel_delta_u, (double)j),
-								vec_scale(pixel_delta_v, (double)i)));
+								vec_scale(pixel_delta_u, (double)i),
+								vec_scale(pixel_delta_v, (double)j)));
 			t_vec3		ray_dir = vec_sub(pixel_center, camera_center);
 			t_ray		r = (t_ray){camera_center, ray_dir};
 			pixel_color = ray_color(r);
