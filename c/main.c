@@ -6,25 +6,34 @@
 /*   By: jeonhan <jeonhan@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/16 18:59:13 by jeonhan           #+#    #+#             */
-/*   Updated: 2026/09/26 13:40:12 by jeonhan          ###   ########.fr       */
+/*   Updated: 2026/09/26 14:09:09 by jeonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <rt.h>
 
-int	hit_sphere(t_point3 center, double radius, t_ray r) {
+double	hit_sphere(t_point3 center, double radius, t_ray r) {
 	t_vec3	oc = vec_sub(center, r.origin);
 	double	a = vec_dot(r.dir, r.dir);
 	double	b = (-2.0) * vec_dot(r.dir, oc);
 	double	c = vec_dot(oc, oc) - (radius * radius);
 	double	discriminant = (b * b) - (4.0 * a * c);
-    return (discriminant >= 0);
+	
+	if (discriminant < 0)
+		return -1.0;
+	else
+		return ((-b - sqrt(discriminant)) / (2.0 * a));
 }
 
 t_color	ray_color(t_ray r) {
-	if (hit_sphere(vec3(0,0,-1), 0.5, r))
-		return (vec3(1, 0, 0));
+	double	t;
 
+	t = hit_sphere(vec3(0,0,-1), 0.5, r);
+	if (t > 0.0)
+	{
+		t_vec3 n = vec_unit(vec_sub(ray_at(r, t), vec3(0, 0, -1)));
+		return (vec_scale(vec3(n.e[0]+1, n.e[1]+1, n.e[2]+1), 0.5));
+	}
 	t_vec3	unit_direction = vec_unit(r.dir);
     double	a = 0.5 * (unit_direction.e[1] + 1.0);
     return vec_add(
