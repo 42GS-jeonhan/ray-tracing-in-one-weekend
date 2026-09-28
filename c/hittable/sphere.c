@@ -6,7 +6,7 @@
 /*   By: jeonhan <jeonhan@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/28 15:30:45 by jeonhan           #+#    #+#             */
-/*   Updated: 2026/09/28 16:47:10 by jeonhan          ###   ########.fr       */
+/*   Updated: 2026/09/28 17:45:40 by jeonhan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,6 @@ int	hit_sphere(t_sphere o, t_ray r, double ray_t_min_max[2], t_hit_record *rec)
 	}
 	rec->t = root;
 	rec->p = ray_at(r, rec->t);
-	rec->normal = vec_scale(vec_sub(rec->p, o.center), (1.0 / o.radius));
+	set_face_normal(&rec, r, vec_div(vec_sub(rec->p, o.center), o.radius));
 	return (1);
 }
